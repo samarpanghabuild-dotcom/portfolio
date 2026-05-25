@@ -223,18 +223,49 @@ document.querySelectorAll("[data-tilt]").forEach(card => {
   card.addEventListener("mouseenter", () => { card.style.transition = "transform 0.1s ease"; });
 });
 
-/* ─── CONTACT FORM ─── */
-document.getElementById("contactForm").addEventListener("submit", function (e) {
+/* ─── CONTACT FORM (Web3Forms) ─── */
+document.getElementById("contactForm").addEventListener("submit", async function (e) {
   e.preventDefault();
   const note = document.getElementById("formNote");
-  const btn  = this.querySelector("button[type=submit]");
-  btn.textContent = "Sending...";
-  setTimeout(() => {
-    btn.innerHTML = 'Send Message <i class="fa fa-paper-plane"></i>';
-    note.textContent = "✓ Thank you! Samarpan will get back to you soon.";
-    this.reset();
-    setTimeout(() => note.textContent = "", 6000);
-  }, 1000);
+  const btn  = document.getElementById("submitBtn");
+
+  const key = document.getElementById("w3f_key").value;
+  if (!key || key === "PASTE_YOUR_KEY_HERE") {
+    note.style.color = "#E74C3C";
+    note.textContent = "⚠ Form not yet configured. Please add your Web3Forms access key.";
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending...';
+  note.style.color = "";
+  note.textContent = "";
+
+  try {
+    const data = Object.fromEntries(new FormData(this));
+    const res  = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(data),
+    });
+    const json = await res.json();
+
+    if (json.success) {
+      note.style.color = "#1ABC9C";
+      note.textContent = "✓ Message sent! Samarpan will reply to you soon.";
+      this.reset();
+    } else {
+      note.style.color = "#E74C3C";
+      note.textContent = "✗ Something went wrong. Please try again or email directly.";
+    }
+  } catch {
+    note.style.color = "#E74C3C";
+    note.textContent = "✗ Network error. Please email samugorlewar@gmail.com directly.";
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = 'Send Message <i class="fa fa-paper-plane"></i>';
+  setTimeout(() => note.textContent = "", 8000);
 });
 
 /* ─── DATA-REVEAL (hero text) ─── */

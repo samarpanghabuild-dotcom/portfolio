@@ -637,25 +637,33 @@
         <!-- RIGHT form -->
         <form class="contact-form glass-card" id="contactForm" data-reveal>
           <h3>Send a <span class="gradient-text">Message</span></h3>
+
+          <!-- Web3Forms hidden fields -->
+          <input type="hidden" name="access_key"    id="w3f_key"     value="PASTE_YOUR_KEY_HERE"/>
+          <input type="hidden" name="subject"       value="New Message from Portfolio — Samarpan Gorlewar"/>
+          <input type="hidden" name="from_name"     value="Samarpan Portfolio"/>
+          <input type="hidden" name="redirect"      value="false"/>
+          <input type="checkbox" name="botcheck"    style="display:none"/>
+
           <div class="form-row">
             <div class="form-group">
               <label><i class="fa fa-user"></i> Your Name</label>
-              <input type="text" placeholder="e.g. HR Manager" required/>
+              <input type="text" name="name" placeholder="e.g. HR Manager" required/>
             </div>
             <div class="form-group">
               <label><i class="fa fa-envelope"></i> Your Email</label>
-              <input type="email" placeholder="hr@company.com" required/>
+              <input type="email" name="email" placeholder="hr@company.com" required/>
             </div>
           </div>
           <div class="form-group">
             <label><i class="fa fa-building"></i> Company / Organization</label>
-            <input type="text" placeholder="e.g. Your Company Name"/>
+            <input type="text" name="company" placeholder="e.g. Your Company Name"/>
           </div>
           <div class="form-group">
             <label><i class="fa fa-comment"></i> Message</label>
-            <textarea rows="4" placeholder="I'd like to schedule an interview..." required></textarea>
+            <textarea rows="4" name="message" placeholder="I'd like to schedule an interview..." required></textarea>
           </div>
-          <button type="submit" class="btn-neon full">
+          <button type="submit" class="btn-neon full" id="submitBtn">
             Send Message <i class="fa fa-paper-plane"></i>
           </button>
           <p class="form-note" id="formNote"></p>
