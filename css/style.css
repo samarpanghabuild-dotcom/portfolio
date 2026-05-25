@@ -255,7 +255,8 @@ ul { list-style: none; }
   0%,100% { box-shadow: 0 0 0 4px rgba(46,134,193,0.3), 0 0 40px rgba(46,134,193,0.25); }
   50%      { box-shadow: 0 0 0 6px rgba(26,188,156,0.4), 0 0 70px rgba(26,188,156,0.3); }
 }
-.hex-inner { color: rgba(255,255,255,0.9); font-size: 5.5rem; }
+.hex-inner { color: rgba(255,255,255,0.9); font-size: 5.5rem; overflow: hidden; border-radius: 50%; }
+.hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%; display: block; }
 
 /* Floating badges */
 .float-badge {
@@ -379,12 +380,14 @@ ul { list-style: none; }
 .about-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
 
 .about-avatar-hex {
-  width: 110px; height: 110px; border-radius: 50%;
+  width: 130px; height: 130px; border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   display: flex; align-items: center; justify-content: center;
   color: rgba(255,255,255,0.9); margin: 0 auto 20px;
   box-shadow: 0 8px 32px rgba(46,134,193,0.4);
+  overflow: hidden; border: 3px solid var(--accent);
 }
+.about-photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 .about-name-plate strong { display: block; color: var(--primary); font-size: 1.05rem; font-weight: 700; }
 .about-name-plate span { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
 
